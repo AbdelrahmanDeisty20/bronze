@@ -133,67 +133,6 @@ class MainController extends Controller
         $cart = Cart::all();
         return resposeJison(1, 'Cart retrieved successfully', $cart);
     }
-    //     public function paymentMethod(Request $request)
-    //     {
-    //         $validator = validator()->make($request->all(), [
-    //             'cart_id' => 'required',
-    //             'name' => 'required',
-    //             'card_number' => 'required',
-    //             'security_code' => 'required',
-    //             'end_date' => 'required',
-    //             'address_id' => 'required',
-    //             'shipping_id' => 'required'
-    //         ]);
-    //         if ($validator->fails()) {
-    //             return resposeJison(0, $validator->errors()->first(), $validator->errors());
-    //         }
-    //         $paypal = new PayPalClient;
-    //         $paypal->setApiCredentials(config('paypal'));
-    //         $token = $paypal->getAccessToken();
-    //         $paypal->setAccessToken($token);
-
-
-    //         $cart = Cart::all();
-    //         $totalPrice = $cart->sum('total_price');
-
-
-    //         $response = $paypal->createOrder([
-    //             "intent" => "CAPTURE",
-    //             "purchase_units" => [
-    //                 [
-    //                     "amount" => [
-    //                         "currency_code" => "USD",
-    //                         "value" => $totalPrice,
-    //                     ]
-    //                 ]
-    //             ]
-    //         ]);
-    //         if ($response['status'] === 'CREATED') {
-    //             $approveLink = collect($response['links'])->firstWhere('rel', 'approve')['href'];
-
-    //             return response()->json([
-    //                 'approval_url' => $approveLink,
-    //                 'order' => $response,
-    //             ]);
-    //         }
-    //     }
-
-    //     public function capture(Request $request)
-    // {
-    //     $paypal = new PayPalClient;
-    //     $paypal->setApiCredentials(config('paypal'));
-    //     $token = $paypal->getAccessToken();
-    //     $paypal->setAccessToken($token);
-
-    //     $orderId = $request->input('order_id');
-
-    //     $response = $paypal->capturePaymentOrder($orderId);
-
-    //     return response()->json($response);
-    // }
-
-
-
     public function paymentMethod(Request $request) {
         $validator= validator()->make($request->all(),[
             'cart_id'=>'required',
